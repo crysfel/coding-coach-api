@@ -1,6 +1,6 @@
-import { Injectable, Inject } from "@graphql-modules/di";
-import { MenteeEntity } from "./mentee-entity";
-import { TableService, TableQuery } from "azure-storage";
+import { Injectable, Inject } from '@graphql-modules/di';
+import { MenteeEntity } from './mentee-entity';
+import { TableService, TableQuery } from 'azure-storage';
 
 export interface IMenteeRepository {
     addMentor(mentee: MenteeEntity): Promise<void>;
@@ -10,8 +10,8 @@ export interface IMenteeRepository {
 
 @Injectable()
 class MenteeRepository implements IMenteeRepository {
-    public tableName: string = "menteeentity";
-    constructor(@Inject("TableService") private tableService: TableService) {
+    public tableName: string = 'menteeentity';
+    constructor(@Inject('TableService') private tableService: TableService) {
         this.tableService.doesTableExist(this.tableName, (error, result) => {
             if (!result.exists) {
                 this.tableService.createTable(this.tableName, (error, result) => {
@@ -40,7 +40,7 @@ class MenteeRepository implements IMenteeRepository {
         return new Promise((resolve, reject) => {
             const query = new TableQuery()
                 .top(1)
-                .where("PartitionKey eq ?", menteeId);
+                .where('PartitionKey eq ?', menteeId);
             this.tableService.queryEntities<MenteeEntity>(
                 this.tableName,
                 query,
