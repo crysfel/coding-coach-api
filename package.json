@@ -47,6 +47,7 @@
     "azurite": "^2.7.0",
     "copyfiles": "^2.1.0",
     "eslint": "^5.16.0",
+    "husky": "^2.1.0",
     "jest": "23.6.0",
     "onchange": "^5.2.0",
     "rimraf": "^2.6.3",
@@ -60,6 +61,11 @@
       "outDir": "dist",
       "rootDir": "src",
       "outHandlersDir": "dist/handlers"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
     }
   }
 }
