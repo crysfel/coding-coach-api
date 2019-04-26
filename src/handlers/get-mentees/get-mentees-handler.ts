@@ -15,7 +15,7 @@ class GetMentees {
 
         context.res = {
             status: "200",
-            body: JSON.stringify(mentees)
+            body: JSON.stringify(mentees),
         };
     };
 }

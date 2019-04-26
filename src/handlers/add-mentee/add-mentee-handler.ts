@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { Context, HttpRequest } from "@azure/functions";
 import {
     IMentorRepository,
-    MentorEntity
+    MentorEntity,
 } from "@repositories/mentor-repository";
 import { Inject, Injectable } from "@graphql-modules/di";
 
@@ -22,7 +22,7 @@ class AddMentee {
         await this.mentorRepository.addMentee(mentor);
 
         context.res = {
-            status: "200"
+            status: "200",
         };
     };
 }

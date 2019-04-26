@@ -8,17 +8,17 @@ const BoundaryModule = new GraphQLModule({
     providers: [
         {
             provide: "IMenteeRepository",
-            useClass: MenteeRepository
+            useClass: MenteeRepository,
         },
         {
             provide: "IMentorRepository",
-            useClass: MentorRepository
+            useClass: MentorRepository,
         },
         {
             provide: "TableService",
-            useValue: new azurestorage.TableService("UseDevelopmentStorage=true")
-        }
-    ]
+            useValue: new azurestorage.TableService("UseDevelopmentStorage=true"),
+        },
+    ],
 });
 
 export { BoundaryModule };

@@ -7,7 +7,7 @@ import { BoundaryModule } from "./boundary-module";
 
 const ApplicationModule = new GraphQLModule({
     providers: [AddMentee, GetMentees, GetMentor],
-    imports: [BoundaryModule]
+    imports: [BoundaryModule],
 });
 
 export { ApplicationModule };

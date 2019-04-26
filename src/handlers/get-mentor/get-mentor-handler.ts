@@ -15,7 +15,7 @@ class GetMentor {
 
         context.res = {
             status: "200",
-            body: JSON.stringify(mentees)
+            body: JSON.stringify(mentees),
         };
     };
 }
