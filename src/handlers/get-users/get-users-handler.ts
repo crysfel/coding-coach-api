@@ -11,13 +11,16 @@ class GetUsers {
 
   index = async (context: Context, req: HttpRequest): Promise<void> => {
 
-    // await this.userRepository.save(user);
+    // @TODO: Add filters
+    const users = await this.userRepository.find();
 
     context.res = {
-      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: {
         success: true,
-        users: [],
+        users,
       },
     };
   };

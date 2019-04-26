@@ -1,10 +1,11 @@
 import { Injectable, Inject } from '@graphql-modules/di';
 import { User } from './User';
-import { TableService } from 'azure-storage';
+import { TableService, TableQuery } from 'azure-storage';
 
-export interface IUserRepository {
-    save(user: User): Promise<void>;
-    tableName: string;
+interface IUserRepository {
+  save(user: User): Promise<void>;
+  find(): Promise<Array<User>>;
+  tableName: string;
 }
 
 @Injectable()
@@ -22,21 +23,41 @@ class UserRepository implements IUserRepository {
         });
     }
 
-    public async save(user: User): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.tableService.insertEntity<User>(
-                this.tableName,
-                user,
-                (error) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve();
-                    }
-                }
-            );
-        });
-    }
+  public async save(user: User): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.tableService.insertEntity<User>(
+        this.tableName,
+        user,
+        (error) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  }
+
+  // @TODO: Add filters as a parameter, for now we are just returning
+  // all users, but ideally we should use the filters we have in the alpha site
+  public async find(/* filters: object */): Promise<Array<User>> {
+    return new Promise((resolve, reject) => {
+      const query = new TableQuery();
+      this.tableService.queryEntities<User>(
+        this.tableName,
+        query,
+        null,
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result.entries);
+          }
+        }
+      );
+    });
+  }
 }
 
 export { UserRepository };
