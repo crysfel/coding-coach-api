@@ -6,31 +6,31 @@ import { IUserRepository, User } from '@repositories/user-repository';
 
 @Injectable()
 class AddUser {
-    constructor(@Inject('IUserRepository') private userRepository: IUserRepository) {
+  constructor(@Inject('IUserRepository') private userRepository: IUserRepository) {
     // Nothing to do here
-    }
+  }
 
-    index = async (context: Context, req: HttpRequest): Promise<void> => {
-        const user = new User({
-            // @TODO: for now using an uuid, but we want to use auth0 Ids to setup these values
-            PartitionKey: uuidv1(),
-            RowKey: uuidv1(),
-            ...req.body,
-        });
+  index = async (context: Context, req: HttpRequest): Promise<void> => {
+    const user = new User({
+      // @TODO: for now using an uuid, but we want to use auth0 Ids to setup these values
+      PartitionKey: uuidv1(),
+      RowKey: uuidv1(),
+      ...req.body,
+    });
 
-        await this.userRepository.save(user);
+    await this.userRepository.save(user);
 
-        context.res = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: {
-                success: true,
-                message: 'Successfully added',
-                user,
-            },
-        };
+    context.res = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        success: true,
+        message: 'Successfully added',
+        user,
+      },
     };
+  };
 }
 
 export { AddUser };

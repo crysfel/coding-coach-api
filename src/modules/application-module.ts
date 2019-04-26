@@ -8,8 +8,8 @@ import { GetUsers } from '@handlers/get-users/get-users-handler';
 import { BoundaryModule } from './boundary-module';
 
 const ApplicationModule = new GraphQLModule({
-    providers: [AddMentee, AddUser, GetMentees, GetMentor, GetUsers],
-    imports: [BoundaryModule],
+  providers: [AddMentee, AddUser, GetMentees, GetMentor, GetUsers],
+  imports: [BoundaryModule],
 });
 
 export { ApplicationModule };
