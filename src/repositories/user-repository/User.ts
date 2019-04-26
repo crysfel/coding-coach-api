@@ -1,6 +1,3 @@
-// import azure from 'azure-storage';
-
-// var entGen = azure.TableUtilities.entityGenerator;
 
 interface UserProps {
     PartitionKey: string;
