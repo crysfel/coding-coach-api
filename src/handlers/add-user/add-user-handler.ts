@@ -21,7 +21,9 @@ class AddUser {
         await this.userRepository.save(user);
 
         context.res = {
-            status: 200,
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: {
                 success: true,
                 message: 'Successfully added',
