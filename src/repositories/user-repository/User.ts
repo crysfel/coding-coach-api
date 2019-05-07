@@ -1,7 +1,6 @@
 
 interface UserProps {
-  PartitionKey: string;
-  RowKey: string;
+  userId: string;
   name?: string;
   email?: string;
   avatar?: string;
@@ -22,5 +21,7 @@ export class User {
 
   constructor(data: UserProps) {
     Object.assign(this, data);
+    this.PartitionKey = data.userId;
+    this.RowKey = data.email;
   }
 }

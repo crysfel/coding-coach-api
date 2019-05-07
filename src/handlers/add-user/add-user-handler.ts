@@ -12,9 +12,8 @@ class AddUser {
 
   index = async (context: Context, req: HttpRequest): Promise<void> => {
     const user = new User({
-      // @TODO: for now using an uuid, but we want to use auth0 Ids to setup these values
-      PartitionKey: uuidv1(),
-      RowKey: uuidv1(),
+      // @TODO: for now using an uuid, but we want to use auth0 Ids to setup this value
+      userId: uuidv1(),
       ...req.body,
     });
 
